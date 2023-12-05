@@ -166,6 +166,7 @@ def main():
             if beam.rct.collidedict(beam.rct):
                 beam = None
                 bomb = None
+                bird.change_img(6, screen)
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
