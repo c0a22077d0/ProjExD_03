@@ -9,8 +9,12 @@ import pygame as pg
 WIDTH = 1600  # ゲームウィンドウの幅
 HEIGHT = 900  # ゲームウィンドウの高さ
 MAIN_DIR = os.path.split(os.path.abspath(__file__))[0]
+<<<<<<< HEAD
 NUM_OF_BOMBS = 5  # 爆弾の数
 
+=======
+NUM_OF_BOMBS = 5
+>>>>>>> bomb
 
 def check_bound(obj_rct: pg.Rect) -> tuple[bool, bool]:
     """
@@ -91,14 +95,20 @@ class Bird:
         if check_bound(self.rct) != (True, True):
             self.rct.move_ip(-sum_mv[0], -sum_mv[1])
         if not (sum_mv[0] == 0 and sum_mv[1] == 0):  # なにもキーが押されていなくなかったら
-            self.img = self.imgs[tuple(sum_mv)] 
+            self.img = self.imgs[tuple(sum_mv)]
         screen.blit(self.img, self.rct)
 
 
 class Bomb:
+<<<<<<< HEAD
     colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), 
               (255, 255, 0), (255, 0, 255), (0, 255, 255)]
     # directions = [-5, +5]
+=======
+    colors = [(255, 0, 0), (0, 255, 0), (0, 0,255),
+            (255, 0, 255), (0, 255, 255)]
+    directions = [-5, +5]
+>>>>>>> bomb
     """
     爆弾に関するクラス
     """
@@ -108,7 +118,11 @@ class Bomb:
         """
         rad = random.randint(10, 100)
         self.img = pg.Surface((2*rad, 2*rad))
+<<<<<<< HEAD
         color = random.choice(__class__.colors)  # Bomb.colors
+=======
+        color = random.choice(Bomb.colors)
+>>>>>>> bomb
         pg.draw.circle(self.img, color, (rad, rad), rad)
         self.img.set_colorkey((0, 0, 0))
         self.rct = self.img.get_rect()
@@ -151,8 +165,12 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
     bg_img = pg.image.load(f"{MAIN_DIR}/fig/pg_bg.jpg")
     bird = Bird(3, (900, 400))
+<<<<<<< HEAD
     # BombインスタンスがNUM個並んだリスト
     bombs = [Bomb() for _ in range(NUM_OF_BOMBS)]  
+=======
+    bombs = [Bomb() for _ in range(NUM_OF_BOMBS)] # bombインスタンスが7個並んだインスタンス
+>>>>>>> bomb
     beam = None
 
     clock = pg.time.Clock()
@@ -175,11 +193,19 @@ def main():
                 return
 
         for i, bomb in enumerate(bombs):
+<<<<<<< HEAD
             if beam is not None and beam.rct.colliderect(bomb.rct):
                 beam = None
                 bombs[i] = None
                 bird.change_img(6, screen)
         # Noneでない爆弾だけのリストを作る
+=======
+            if beam is not None:
+                if beam.rct.colliderect(bomb.rct):
+                    beam = None
+                    bomb[i] = None
+                    bird.change_img(6, screen)
+>>>>>>> bomb
         bombs = [bomb for bomb in bombs if bomb is not None]
 
         key_lst = pg.key.get_pressed()
